@@ -7,14 +7,17 @@ public class EmpWageComputation
 		public static final int IS_PART_TIME = 2;
 		public static final int WAGE_PER_HOUR = 20;
 		public static final int NUMBER_OF_WORKING_DAYS = 20;
+		public static final int NUMBER_OF_WORKING_HOURS = 100;
 	
 	public static void main(String[] args) 
 	{
 		Random random = new Random();
 		// Variables
 			int totalEmployeeWage = 0;
+			int day = 0;
+			int workingHours = 0;
 		// Computation
-			for ( int day = 1; day <= NUMBER_OF_WORKING_DAYS; day++ )
+			while ( day < NUMBER_OF_WORKING_DAYS && workingHours < NUMBER_OF_WORKING_HOURS)
 			{
 				int empHours = 0;
 				int dailyEmployeeWage = 0;
@@ -27,10 +30,13 @@ public class EmpWageComputation
 					 break;
 				default			: empHours = 0;
 				}
+				workingHours =  workingHours + empHours;
+				day++;
 				dailyEmployeeWage = empHours * WAGE_PER_HOUR;
 				System.out.println( "Daily Employee Wage is : " + dailyEmployeeWage );
 				totalEmployeeWage = totalEmployeeWage + dailyEmployeeWage;
 			}
+			
 			System.out.println( "Total Employee wage is : " + totalEmployeeWage );
 	}
 }
