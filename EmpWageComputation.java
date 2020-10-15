@@ -15,19 +15,16 @@ public class EmpWageComputation
 			int dailyEmployeeWage = 0;
 		// Computation
 			int empStatus = random.nextInt(3);
-			if ( empStatus == IS_FULL_TIME )
+			
+			switch( empStatus )
 			{
-				empHours = 8;
-			}
-			else if ( empStatus == IS_PART_TIME )
-			{
-				empHours = 4;
-			}
-			else
-			{
-				empHours = 0;
+			case IS_FULL_TIME	: empHours = 8;
+				 break;
+			case IS_PART_TIME	: empHours = 4;
+				 break;
+			default			: empHours = 0;
 			}
 			dailyEmployeeWage = empHours * WAGE_PER_HOUR;
-			System.out.println("Daily Employee Wage is : "+dailyEmployeeWage);
+			System.out.println("Daily Employee Wage is : " + dailyEmployeeWage );
 	}
 }
