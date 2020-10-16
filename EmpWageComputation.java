@@ -85,7 +85,7 @@ class CompanyEmployeeWage
 	public final int numberOfWorkingHours;
 	public final String company;
 	public int totalEmployeeWage;
-
+	public int dailyEmployeeWage;
 	public CompanyEmployeeWage ( String company, int wagePerHour, int numberOfWorkingDays, int numberOfWorkingHours )
 	{
 		this.company = company;
@@ -96,6 +96,10 @@ class CompanyEmployeeWage
 	public void setTotalEmployeeWage ( int totalEmployeeWage )
 	{
 		this.totalEmployeeWage = totalEmployeeWage;
+	}
+	public void setDailyEmployeeWage ( int dailyEmployeeWage )
+	{
+		this.dailyEmployeeWage = dailyEmployeeWage;
 	}
 	@Override
 	public String toString()
