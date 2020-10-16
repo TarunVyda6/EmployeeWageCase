@@ -1,4 +1,4 @@
-import java.util.Random;
+import java.util.*;
 
 interface ComputeEmployeeWageInterface
 {
@@ -11,33 +11,33 @@ public class EmpWageComputation implements ComputeEmployeeWageInterface
 	// Constants
 	public static final int IS_FULL_TIME = 1;
 	public static final int IS_PART_TIME = 2;
-	private int numberOfCompanies = 0;
-	private CompanyEmployeeWage[] companyEmployeeWageArray;
+	private ArrayList< CompanyEmployeeWage > companyEmployeeWageList;
 	public static void main(String[] args) 
 	{
-		EmpWageComputation allCompanies = new EmpWageComputation();
-		allCompanies.addCompanyEmployeeWage ( "MICROSOFT" , 20, 20, 100 );
-		allCompanies.addCompanyEmployeeWage ( "GOOGLE", 40, 40, 100 );
-		allCompanies.computeEmployeeWage ();
+		ComputeEmployeeWageInterface allCompanies=new EmpWageComputation();
+        allCompanies.addCompanyEmployeeWage ( "MICROSOFT" , 20, 20, 100 );
+        allCompanies.addCompanyEmployeeWage ( "GOOGLE" , 40, 40, 100 );
+        allCompanies.computeEmployeeWage ();
 	}
 
 
 	public EmpWageComputation ()
 	{
-		companyEmployeeWageArray = new CompanyEmployeeWage [ 5 ];
+		 companyEmployeeWageList = new ArrayList<>();
 	}
 
 	public void addCompanyEmployeeWage( String company, int wagePerHour, int numberOfWorkingDays, int numberOfWorkingHours )
 	{
-		companyEmployeeWageArray [ numberOfCompanies ] = new CompanyEmployeeWage ( company, wagePerHour, numberOfWorkingDays, numberOfWorkingHours );
-		numberOfCompanies++;
+		CompanyEmployeeWage companyEmployeeWage=new CompanyEmployeeWage( company, wagePerHour, numberOfWorkingDays, numberOfWorkingHours);
+        companyEmployeeWageList.add ( companyEmployeeWage );
 	}
 	public void computeEmployeeWage ()
 	{
-		for( int i = 0; i < numberOfCompanies; i++ )
+		for( int i = 0; i < companyEmployeeWageList.size(); i++ )
 		{
-			companyEmployeeWageArray[ i ].setTotalEmployeeWage( this.wageCalculation( companyEmployeeWageArray [ i ] ) );
-			System.out.println ( companyEmployeeWageArray [ i ] );
+			CompanyEmployeeWage companyEmployeeWage = companyEmployeeWageList.get ( i );
+            companyEmployeeWage.setTotalEmployeeWage ( this.wageCalculation ( companyEmployeeWage ) );
+            System.out.println( companyEmployeeWage );
 		}
 	}
 
@@ -86,21 +86,21 @@ class CompanyEmployeeWage
 	public final String company;
 	public int totalEmployeeWage;
 
-	public CompanyEmployeeWage(String company,int wagePerHour, int numberOfWorkingDays,int numberOfWorkingHours)
+	public CompanyEmployeeWage ( String company, int wagePerHour, int numberOfWorkingDays, int numberOfWorkingHours )
 	{
 		this.company = company;
 		this.wagePerHour = wagePerHour;
 		this.numberOfWorkingDays = numberOfWorkingDays;
 		this.numberOfWorkingHours = numberOfWorkingHours;
 	}
-	public void setTotalEmployeeWage (int totalEmployeeWage)
+	public void setTotalEmployeeWage ( int totalEmployeeWage )
 	{
 		this.totalEmployeeWage = totalEmployeeWage;
 	}
 	@Override
 	public String toString()
 	{
-		return "total emp wage for " + company + " is:" + totalEmployeeWage;
+		return "total emp wage for " + company + " is : " + totalEmployeeWage;
 	}
 }
 
