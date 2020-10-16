@@ -1,6 +1,12 @@
 import java.util.Random;
 
-public class EmpWageComputation 
+interface ComputeEmployeeWageInterface
+{
+	public void addCompanyEmployeeWage ( String company, int wagePerHour, int numberOfWorkingDays, int numberOfWorkingHours );
+	public void computeEmployeeWage ();
+}
+
+public class EmpWageComputation implements ComputeEmployeeWageInterface
 {
 	// Constants
 	public static final int IS_FULL_TIME = 1;
@@ -10,8 +16,8 @@ public class EmpWageComputation
 	public static void main(String[] args) 
 	{
 		EmpWageComputation allCompanies = new EmpWageComputation();
-		allCompanies.addCompanyEmpWage ( "MICROSOFT" , 20, 20, 100 );
-		allCompanies.addCompanyEmpWage ( "GOOGLE", 40, 40, 100 );
+		allCompanies.addCompanyEmployeeWage ( "MICROSOFT" , 20, 20, 100 );
+		allCompanies.addCompanyEmployeeWage ( "GOOGLE", 40, 40, 100 );
 		allCompanies.computeEmployeeWage ();
 	}
 
@@ -21,12 +27,12 @@ public class EmpWageComputation
 		companyEmployeeWageArray = new CompanyEmployeeWage [ 5 ];
 	}
 
-	private void addCompanyEmpWage( String company, int wagePerHour, int numberOfWorkingDays, int numberOfWorkingHours )
+	public void addCompanyEmployeeWage( String company, int wagePerHour, int numberOfWorkingDays, int numberOfWorkingHours )
 	{
 		companyEmployeeWageArray [ numberOfCompanies ] = new CompanyEmployeeWage ( company, wagePerHour, numberOfWorkingDays, numberOfWorkingHours );
 		numberOfCompanies++;
 	}
-	private void computeEmployeeWage ()
+	public void computeEmployeeWage ()
 	{
 		for( int i = 0; i < numberOfCompanies; i++ )
 		{
@@ -56,12 +62,12 @@ public class EmpWageComputation
 				break;
 				case IS_PART_TIME	: empHours = 4;
 				break;
-				default				: empHours = 0;
+				default			: empHours = 0;
 			}
 			workingHours =  workingHours + empHours;
 			day++;
 			dailyEmployeeWage = empHours * companyEmployeeWage.wagePerHour;
-			System.out.println( "Daily Employee Wage for " + companyEmployeeWage.company + "is : " + dailyEmployeeWage );
+			System.out.println( "Daily Employee Wage for " + companyEmployeeWage.company + " is : " + dailyEmployeeWage );
 			companyEmployeeWage.totalEmployeeWage = companyEmployeeWage.totalEmployeeWage + dailyEmployeeWage;
 
 		}
@@ -94,7 +100,7 @@ class CompanyEmployeeWage
 	@Override
 	public String toString()
 	{
-		return "total emp wage for " + company + " is : " + totalEmployeeWage;
+		return "total emp wage for " + company + " is:" + totalEmployeeWage;
 	}
 }
 
