@@ -4,6 +4,7 @@ interface ComputeEmployeeWageInterface
 {
 	public void addCompanyEmployeeWage ( String company, int wagePerHour, int numberOfWorkingDays, int numberOfWorkingHours );
 	public void computeEmployeeWage ();
+	public int getTotalWage(String company);
 }
 
 public class EmpWageComputation implements ComputeEmployeeWageInterface
@@ -12,24 +13,28 @@ public class EmpWageComputation implements ComputeEmployeeWageInterface
 	public static final int IS_FULL_TIME = 1;
 	public static final int IS_PART_TIME = 2;
 	private ArrayList< CompanyEmployeeWage > companyEmployeeWageList;
+	private Map< String, CompanyEmployeeWage > companyToEmployeeWageMap;
+	
 	public static void main(String[] args) 
 	{
-		ComputeEmployeeWageInterface allCompanies=new EmpWageComputation();
+		ComputeEmployeeWageInterface allCompanies = new EmpWageComputation();
         allCompanies.addCompanyEmployeeWage ( "MICROSOFT" , 20, 20, 100 );
         allCompanies.addCompanyEmployeeWage ( "GOOGLE" , 40, 40, 100 );
         allCompanies.computeEmployeeWage ();
+        System.out.println( "total emp wage for Google is " + allCompanies.getTotalWage ( "GOOGLE" ) );
 	}
-
 
 	public EmpWageComputation ()
 	{
 		 companyEmployeeWageList = new ArrayList<>();
+		 companyToEmployeeWageMap = new HashMap<>();
 	}
 
 	public void addCompanyEmployeeWage( String company, int wagePerHour, int numberOfWorkingDays, int numberOfWorkingHours )
 	{
 		CompanyEmployeeWage companyEmployeeWage=new CompanyEmployeeWage( company, wagePerHour, numberOfWorkingDays, numberOfWorkingHours);
         companyEmployeeWageList.add ( companyEmployeeWage );
+        companyToEmployeeWageMap.put(company, companyEmployeeWage);
 	}
 	public void computeEmployeeWage ()
 	{
@@ -41,6 +46,11 @@ public class EmpWageComputation implements ComputeEmployeeWageInterface
 		}
 	}
 
+	@Override
+	public int getTotalWage ( String company )
+	{
+		return companyToEmployeeWageMap.get( company ).totalEmployeeWage;
+	}
 
 
 	public int wageCalculation ( CompanyEmployeeWage companyEmployeeWage)
@@ -62,12 +72,11 @@ public class EmpWageComputation implements ComputeEmployeeWageInterface
 				break;
 				case IS_PART_TIME	: empHours = 4;
 				break;
-				default			: empHours = 0;
+				default	  		: empHours = 0;
 			}
 			workingHours =  workingHours + empHours;
 			day++;
 			dailyEmployeeWage = empHours * companyEmployeeWage.wagePerHour;
-			System.out.println( "Daily Employee Wage for " + companyEmployeeWage.company + " is : " + dailyEmployeeWage );
 			companyEmployeeWage.totalEmployeeWage = companyEmployeeWage.totalEmployeeWage + dailyEmployeeWage;
 
 		}
@@ -107,7 +116,4 @@ class CompanyEmployeeWage
 		return "total emp wage for " + company + " is : " + totalEmployeeWage;
 	}
 }
-
-
-
 
