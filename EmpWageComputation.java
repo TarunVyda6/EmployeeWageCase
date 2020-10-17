@@ -18,10 +18,10 @@ public class EmpWageComputation implements ComputeEmployeeWageInterface
 	public static void main(String[] args) 
 	{
 		ComputeEmployeeWageInterface allCompanies = new EmpWageComputation();
-        allCompanies.addCompanyEmployeeWage ( "MICROSOFT" , 20, 20, 100 );
-        allCompanies.addCompanyEmployeeWage ( "GOOGLE" , 40, 40, 100 );
-        allCompanies.computeEmployeeWage ();
-        System.out.println( "total emp wage for Google is " + allCompanies.getTotalWage ( "GOOGLE" ) );
+       		allCompanies.addCompanyEmployeeWage ( "MICROSOFT" , 20, 20, 100 );
+		allCompanies.addCompanyEmployeeWage ( "GOOGLE" , 40, 40, 100 );
+		allCompanies.computeEmployeeWage ();
+		System.out.println( "total emp wage for Google is " + allCompanies.getTotalWage ( "GOOGLE" ) );
 	}
 
 	public EmpWageComputation ()
@@ -33,16 +33,16 @@ public class EmpWageComputation implements ComputeEmployeeWageInterface
 	public void addCompanyEmployeeWage( String company, int wagePerHour, int numberOfWorkingDays, int numberOfWorkingHours )
 	{
 		CompanyEmployeeWage companyEmployeeWage=new CompanyEmployeeWage( company, wagePerHour, numberOfWorkingDays, numberOfWorkingHours);
-        companyEmployeeWageList.add ( companyEmployeeWage );
-        companyToEmployeeWageMap.put(company, companyEmployeeWage);
+		companyEmployeeWageList.add ( companyEmployeeWage );
+		companyToEmployeeWageMap.put(company, companyEmployeeWage);
 	}
 	public void computeEmployeeWage ()
 	{
 		for( int i = 0; i < companyEmployeeWageList.size(); i++ )
 		{
-			CompanyEmployeeWage companyEmployeeWage = companyEmployeeWageList.get ( i );
-            companyEmployeeWage.setTotalEmployeeWage ( this.wageCalculation ( companyEmployeeWage ) );
-            System.out.println( companyEmployeeWage );
+			companyEmployeeWage companyEmployeeWage = companyEmployeeWageList.get ( i );
+			companyEmployeeWage.setTotalEmployeeWage ( this.wageCalculation ( companyEmployeeWage ) );
+			System.out.println( companyEmployeeWage );
 		}
 	}
 
